@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
+import { useState } from "react";
 
 const COLOR = {
   RESULT: "#4e4c51",
@@ -42,10 +43,29 @@ const ButtonContainer = styled.View`
   width: 100%;
 `;
 
+const InputContainer = styled.View`
+  background-color: ${COLOR.RESULT};
+  min-height: 50px;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 10px 5px;
+`;
+
 export default () => {
+  const [input, setInput] = useState(0); // 계산기에 입력한 값
+  const [currentOperator, setCurrentOperator] = useState(null); // 현재 선택된 연산자
+  const [result, setResult] = useState(null); // 연산 결과 값
+  const [tempInput, setTempInput] = useState(null); // = 클릭 시 직전 입력한 값
+  const [tempOperator, setTempOperator] = useState(null); // = 클릭 시 직접 입력한 연산자
+
   return (
-    <View style={{ flex: 1, width: 250 }}>
+    <View style={{ flex: 1, width: 250, justifyContent: "center" }}>
       {/* 결과 */}
+      <InputContainer>
+        <Text style={{ color: "white", fontSize: 35, textAlign: "right" }}>
+          {input}
+        </Text>
+      </InputContainer>
 
       {/* [AC ~ /] */}
       <ButtonContainer>
